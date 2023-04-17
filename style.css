@@ -1,0 +1,44 @@
+/* 將所有元素的外邊距和內邊距設置為0，並使用邊框盒模型 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 設置 body 的樣式 */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 200px;
+    background: #352727;
+}
+/* 設置卡片的樣式 */
+.card {
+    position: relative;
+    background: #352727;
+    width: 250px;
+    height: 390px;
+}
+/* 使用 ::before 偽元素添加卡片的背景 */
+.card::before {
+    content: "";
+    position: absolute;
+    box-shadow: 0 0 0 20px #3f2e2e;
+    /* 設置背景的漸變顏色 */
+    background: linear-gradient(45deg, #ffc800, #574040, #574040, #ff6200);
+    inset: -2px;
+    z-index: -1;
+}
+/* 使用 ::after 偽元素添加卡片的模糊效果 */
+.card::after {
+    content: "";
+    position: absolute;
+    box-shadow: 0 0 0 20px #3f2e2e;
+    /* 設置背景的漸變顏色 */
+    background: linear-gradient(45deg, #ffc800, #574040, #574040, #ff6200);
+    inset: -2px;
+    z-index: -1;
+    /* 使用模糊濾鏡增加卡片的模糊效果 */
+    filter: blur(10px);
+}
