@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按鈕交互動畫</title>
+</head>
+<style>
+    body{
+        background-color: black;
+    }
+    /* 定義一個名為 body 的 class，用於設置頁面主要內容的對齊方式及高度 */
+    .body {
+        height: 100px; /* 設置元素高度為 100px */
+        display: flex; /* 設置元素為 flex display，便於內部元素對齊方式的設置 */
+        align-items: center; /* 設置元素的垂直對齊方式為居中對齊 */
+        justify-content: center; /* 設置元素的水平對齊方式為居中對齊 */
+        margin: 0; /* 取消元素的外邊距 */
+        padding: 0; /* 取消元素的內邊距 */
+        box-sizing: border-box; /* 設置元素的盒子模型為實際寬高包含邊框和內容大小 */
+    }
+     /* 定義按鈕元素的樣式 */
+    button {
+        --color: rgb(68, 255, 205); /* 定義一個名為 color 的變數，存儲一個 green 的 RGB 值用於設置按鈕的顏色 */
+        border: 0; /* 取消按鈕邊框 */
+        font-family: inherit; /* 繼承字體樣式 */
+        font-size: 2.6rem; /* 設置字體大小 */
+        font-weight: 500; /* 設置字體粗細 */
+        color: black; /* 設置文本顏色為黑色 */
+        background-color: var(--color); /* 設置按鈕背景顏色為定義的 color 變數的值 */
+        padding: 20px 45px; /* 設置按鈕內容部分的上下左右 padding 值 */
+        position: relative; /* 設置按鈕元素的定位為相對定位 */
+        transition: .15s ease; /* 設置按鈕的過渡效果 */
+    }
+     /* 設置鼠標懸停時按鈕的樣式 */
+    button:hover {
+        background: transparent; /* 設置按鈕背景為透明 */
+        color: var(--color); /* 設置文本顏色為定義的 color 變數的值 */
+    }
+     /* 設置按鈕的 before 和 after 元素 */
+    button::before,
+    button::after {
+        content: ""; /* 設置元素內容為空 */
+        position: absolute; /* 設置元素定位為絕對定位 */
+        width: 0%; /* 設置元素寬度為 0 */
+        height: 2px; /* 設置元素高度為 2px */
+        background: var(--color); /* 設置元素背景色為定義的 color 變數的值 */
+        transition: .35s ease .1s; /* 設置元素的過渡效果 */
+    }
+     /* 設置 before 元素的位置 */
+    button::before{
+        top: 0;
+        left: 0;
+    }
+     /* 設置 after 元素的位置 */
+    button::after{
+        bottom: 0;
+        right: 0;
+    }
+     /* 設置鼠標懸停時 before 和 after 的寬度 */
+    button:hover::before,
+    button:hover::after{
+        width: 100%;
+    }
+</style>
+
+<body>
+    <button>this is button</button>
+</body>
+
+</html>
