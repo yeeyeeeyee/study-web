@@ -7,6 +7,7 @@
     <title>Sola_system</title>
 
     <style>
+        /* 设置页面元素为全屏并垂直居中 */
         body { 
             margin: 0;
             height: 100vh;
@@ -17,6 +18,7 @@
             overflow: hidden;
         }
 
+        /* 设置容器样式 */
         .container {
             font-size: 10px;
             width: 40em;
@@ -24,6 +26,7 @@
             position: relative;
         }
 
+        /* 设置太阳样式 */
         .sun{
             position: absolute;
             top: 15em;
@@ -35,8 +38,10 @@
             box-shadow: 0 0 3em white;
         }
 
+        /* 设置地球和月亮公共样式 */
         .earth,.moon{
             position: absolute;
+            /* 绘制边框 */
             border-style: solid;
             border-color:white 
             transparent
@@ -46,58 +51,68 @@
             border-radius: 50%;
         }
         
+        /* 设置地球样式 */
         .earth{
             top: 5em;
             left: 5em;
             height: 30em;
             width: 30em;
+            /* 设置旋转动画 */
             animation: orbit 36.5s linear infinite;
         }
         
-       .moon{
+        /* 设置月亮样式 */
+        .moon{
             top: 0;
             right: 0;
             width: 8em;
             height: 8em;
+            /* 设置旋转动画 */
             animation: orbit 2.7s linear infinite;
-       }
-
-       .earth::before,
-       .moon::before{
-        content: "";
-        position: absolute;
-        border-radius:50% ;
-       }
-
-       .earth::before{
-        top: 2.8em;
-        right: 2.8em;
-        height: 3em;
-        width: 3em;
-        background-color: aqua;
-       }
-
-       .moon::before{
-        top: 0.8em;
-        right: 0.8em;
-        width: 1.2em;
-        height: 1.2em;
-        background-color: silver;
         }
+
+        /* 设置地球和月亮的光晕样式 */
+        .earth::before,
+        .moon::before{
+            content: "";
+            position: absolute;
+            border-radius:50% ;
+        }
+
+        /* 设置地球光晕样式 */
+        .earth::before{
+            top: 2.8em;
+            right: 2.8em;
+            height: 3em;
+            width: 3em;
+            background-color: aqua;
+        }
+
+        /* 设置月亮光晕样式 */
+        .moon::before{
+            top: 0.8em;
+            right: 0.8em;
+            width: 1.2em;
+            height: 1.2em;
+            background-color: silver;
+        }
+
+        /* 设置旋转动画 */
         @keyframes orbit {
             to{
                 transform: rotate(300deg);
             }
         }
-       
-
     </style>
 </head>
 
 <body>
     <div class="container">
+        <!-- 创建太阳 -->
         <div class="sun"></div>
+        <!-- 创建地球 -->
         <div class="earth">
+            <!-- 在地球上创建月亮 -->
             <div class="moon"></div>
         </div>
     </div>
