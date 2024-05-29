@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="web\style.css">
+    <style>
+        body{
+            background: linear-gradient(to right, purple, blue);
+        }
+        .todo-app{
+            width: 98%;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-top: 40px;
+            margin-left: 1%;
+            padding-top: 30px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .title{
+            font-size: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .todo-form{
+            display: flex;
+            padding-top: 20px;
+            margin-left: 20%;
+        }
+        .todo-input{
+            border: 1px solid #ccc;
+            border-radius: 20px 0 0 20px;
+            outline: none;
+            width: 60%;
+            height: 50px;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        .todo-button{
+            width: 100px; 
+            height: 53px;
+            background-color: purple;
+            text-align: center;
+            border-radius: 0 20px 20px 0;
+            color: #fff;
+            line-height: 52px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .item{
+            display: flex;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            width: 80%;
+            height: 50px;
+            margin: 8px auto;
+            padding: 16px;
+            border-radius: 20px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 20px;
+        }
+        .del{
+            color: red;
+            cursor: pointer;
+        }
+        .completed .name{
+            text-decoration: line-through;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-app">
+        <div class="title">Todo list</div>
+        <div class="todo-form">
+            <input class="todo-input" type="text" placeholder="add todo">
+            <div class="todo-button">add item</div>
+        </div>
+        <div class="items-container"></div>
+    </div>
+
+    <script>
+        // 功能1: 添加item (包含按下Enter)
+        document.querySelector('.todo-button').addEventListener('click', addItemFromInput);
+        document.querySelector('.todo-input').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                addItemFromInput();
+            }
+        });
+
+        function addItemFromInput() {
+            const todoInput = document.querySelector('.todo-input');
+            const todoText = todoInput.value.trim();
+            if (todoText !== "") {
+                addItem(todoText);
+                todoInput.value = "";
+                adjustContainerHeight();
+            }
+        }
+
+        // 功能2: 勾選完成的item
+        function toggleComplete(event) {
+            const item = event.target.closest('.item');
+            item.classList.toggle('completed');
+        }
+
+        // 功能3: 刪除item
+        function deleteItem(event) {
+            const item = event.target.closest('.item');
+            item.remove();
+            adjustContainerHeight();
+        }
+
+        function addItem(text) {
+            const itemsContainer = document.querySelector('.items-container');
+            const newItem = document.createElement('div');
+            newItem.classList.add('item');
+            newItem.innerHTML = `
+                <div>
+                    <input type="checkbox">
+                    <span class="name">${text}</span>
+                </div>
+                <div class="del">del</div>
+            `;
+            newItem.querySelector('input[type="checkbox"]').addEventListener('change', toggleComplete);
+            newItem.querySelector('.del').addEventListener('click', deleteItem);
+            itemsContainer.appendChild(newItem);
+        }
+
+        // 調整容器高度
+        function adjustContainerHeight() {
+            const items = document.querySelectorAll('.items-container .item').length;
+            const todoApp = document.querySelector('.todo-app');
+            if (items > 5) {
+                todoApp.style.height = (500 + ((items - 5) * 60)) + 'px';
+            } else {
+                todoApp.style.height = '500px';
+            }
+        }
+
+        // 初始化現有的item事件監聽器
+        document.querySelectorAll('.item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', toggleComplete);
+        });
+
+        document.querySelectorAll('.item .del').forEach(delButton => {
+            delButton.addEventListener('click', deleteItem);
+        });
+    </script>
+</body>
+</html>
